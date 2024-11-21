@@ -2,7 +2,7 @@
 
 # AIducation: GenAI Education Excellence
 
-Welcome to the **AIducation** repository. This platform, powered by the **Falcon 180B LLM**, is designed to address critical challenges in modern education, transforming the learning experience for both students and teachers. Our innovative approach streamlines administrative tasks, personalizes learning, and enhances academic outcomes through advanced AI technologies.
+Welcome to the **Smart-Learn** repository. This platform, powered by the **Falcon LLM** and **OpenAI**, is designed to address critical challenges in modern education, transforming the learning experience for both students and teachers. Our innovative approach streamlines administrative tasks, personalizes learning, and enhances academic outcomes through advanced AI technologies.
 
 ## Table of Contents
 
@@ -61,57 +61,26 @@ The education sector today faces significant challenges, from administrative ine
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/roshnn24/Falcon_final.git
+git clone https://github.com/HarshJa1n/llm-education-platform.git
 ```
 
 Navigate to the project directory:
 
 ```bash
-cd smart-education-system
+cd llm-education-platform
 ```
 
-Follow the setup instructions in the `INSTALL.md` file to configure your environment.
+Provide the keys  mentioned in the `.sample.env` create `.env` file to configure your environment.
 
 ### Usage
 
 After installation, you can start the application using:
 
 ```bash
-npm start
+python app.py
 ```
 
 Visit `http://localhost:3000` in your browser to access the platform.
 
-## Subscription Model
-
-Our platform adopts a subscription model catering to:
-
-- **Individual Users:** Personalized learning plans and access to all features.
-- **Schools:** Comprehensive solutions for entire schools.
-- **Districts:** Scalable solutions for educational districts.
-- **Enterprise:** Large-scale deployments with tailored features.
-
-Our pricing strategy ensures accessibility while reflecting the advanced capabilities of our system.
-
-## Future Prospects
-
-We are committed to continuous innovation and expansion. Our future plans include:
-
-- **AR/VR Integration:** Bringing immersive experiences to education.
-- **International Market Adaptation:** Tailoring our solutions for global markets.
-- **Partnerships with Educational Institutions:** Collaborating to enhance and expand our offerings.
-
-## Contributing
-
-We welcome contributions from the community! Please refer to the `CONTRIBUTING.md` file for guidelines on how to get involved.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For more information, please reach out to us at [roshauninfant@gmail.com](mailto:roshauninfant@gmail.com).
-
 ---
-# llm-education-platform
+
