@@ -1,0 +1,235 @@
+description: "AI Tutor Test Cases for B.Tech Computer Science Students"
+
+prompts:
+  # Zero-shot prompt
+  - |
+    You are an AI tutor designed to answer questions for B.Tech Computer Science students. You should provide detailed and accurate answers based on their queries. Given a student's question, respond appropriately, covering topics like Data Structures, Algorithms, Databases, Computer Networks, and more.
+    query: {{inquiry}}
+
+  # Few-shot prompt
+  - |
+    You are an AI tutor. Here's how you respond to different types of questions:
+
+    Q: Explain the time complexity of binary search.
+    A: Binary search has a time complexity of O(log n). It works by repeatedly dividing the search interval in half...
+
+    Q: What is normalization in databases?
+    A: Normalization in databases is the process of organizing data to reduce redundancy and improve data integrity...
+
+    Based on this, answer the student's query below.
+    query: {{inquiry}}
+
+providers:
+  - openai:gpt-4o-mini
+
+tests:
+  # 1. Data Structures - Zero-shot
+  - vars:
+      inquiry: "Explain the time complexity of merge sort."
+    assert:
+      - type: similar
+        value: "Merge sort has a time complexity of O(n log n)."
+        threshold: 0.7
+
+  # 2. Data Structures - Few-shot
+  - vars:
+      inquiry: "What is the difference between a stack and a queue?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The explanation should mention that:
+          1. A stack follows LIFO (Last In First Out) principle.
+          2. A queue follows FIFO (First In First Out) principle.
+          3. Examples or real-world analogies are a plus.
+
+  # 3. Algorithms - Zero-shot
+  - vars:
+      inquiry: "Describe Dijkstra's algorithm."
+    assert:
+      - type: similar
+        value: "Dijkstra's algorithm is used to find the shortest path in a graph with non-negative weights."
+        threshold: 0.7
+
+  # 4. Algorithms - Few-shot
+  - vars:
+      inquiry: "Explain dynamic programming with an example."
+    assert:
+      - type: llm-rubric
+        value: |
+          The explanation should:
+          1. Define dynamic programming as an optimization technique.
+          2. Mention subproblems and overlapping subproblems.
+          3. Provide a valid example like Fibonacci or knapsack problem.
+
+  # 5. Database - Zero-shot
+  - vars:
+      inquiry: "What is normalization in databases?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The answer should:
+          1. Define normalization as organizing data to reduce redundancy.
+          2. Explain the purpose of ensuring data integrity.
+          3. Optionally mention different normal forms.
+
+  # 6. Database - Few-shot
+  - vars:
+      inquiry: "What is the difference between a primary key and a foreign key?"
+    assert:
+      - type: similar
+        value: "A primary key uniquely identifies each record, while a foreign key links two tables."
+        threshold: 0.7
+
+  # 7. Operating Systems - Zero-shot
+  - vars:
+      inquiry: "What is a deadlock?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The answer should:
+          1. Define deadlock as a state where processes are stuck waiting on each other.
+          2. Mention conditions like mutual exclusion, hold and wait, no preemption, and circular wait.
+  
+  # 8. Operating Systems - Few-shot
+  - vars:
+      inquiry: "Explain the difference between process and thread."
+    assert:
+      - type: llm-rubric
+        value: |
+          The response should explain:
+          1. A process is an independent program in execution, with its own memory space.
+          2. A thread is the smallest unit of execution within a process, sharing memory.
+
+  # 9. Computer Networks - Zero-shot
+  - vars:
+      inquiry: "Explain the OSI model."
+    assert:
+      - type: llm-rubric
+        value: |
+          The answer should:
+          1. Mention that OSI stands for Open Systems Interconnection.
+          2. Describe the 7 layers in brief: Physical, Data Link, Network, Transport, Session, Presentation, and Application.
+
+  # 10. Computer Networks - Few-shot
+  - vars:
+      inquiry: "What is the difference between TCP and UDP?"
+    assert:
+      - type: similar
+        value: "TCP is connection-oriented, reliable, and provides error checking, while UDP is connectionless and faster but less reliable."
+        threshold: 0.7
+  
+  # 12. Computer Networks - Mixed Topics
+  - vars:
+      inquiry: "Can you explain the OSI model and the importance of pointers in C?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The answer should:
+          1. Cover both topics (OSI model and pointers in C) clearly.
+          2. Provide a brief description of each.
+          3. Correctly identify the OSI model layers and the concept of memory pointers in C.
+
+  # 13. Programming Languages - Zero-shot
+  - vars:
+      inquiry: "What is polymorphism in object-oriented programming?"
+    assert:
+      - type: similar
+        value: "Polymorphism allows objects to be treated as instances of their parent class."
+        threshold: 0.7
+
+  # 14. Programming Languages - Few-shot
+  - vars:
+      inquiry: "Explain the difference between method overloading and method overriding."
+    assert:
+      - type: llm-rubric
+        value: |
+          The answer should:
+          1. Define method overloading as having multiple methods with the same name but different parameters.
+          2. Define method overriding as redefining a parent class method in a subclass.
+
+  # 15. Error handling - Zero-shot
+  - vars:
+      inquiry: "What is a segmentation fault?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The answer should explain:
+          1. A segmentation fault occurs when a program tries to access an invalid memory location.
+          2. Mention that it is common in C/C++ programs when using pointers.
+
+  # 16. Multi-topic query - Zero-shot
+  - vars:
+      inquiry: "Explain OSI model, deadlock, and merge sort."
+    assert:
+      - type: llm-rubric
+        value: |
+          The response should:
+          1. Provide brief explanations of all three topics.
+          2. Ensure clarity without mixing up concepts.
+  
+  # 17. Programming Languages - Edge case
+  - vars:
+      inquiry: ""
+    assert:
+      - type: contains
+        value: "Please provide a question or topic you'd like help with."
+
+  # 18. Algorithms - Zero-shot
+  - vars:
+      inquiry: "Explain the knapsack problem."
+    assert:
+      - type: llm-rubric
+        value: |
+          The explanation should:
+          1. Define the knapsack problem as a combinatorial optimization problem.
+          2. Mention the goal of maximizing value within a weight limit.
+          3. Optionally describe a dynamic programming solution.
+
+  # 19. Task completion - Few-shot
+  - vars:
+      inquiry: "Thanks for your help!"
+    assert:
+      - type: llm-rubric
+        value: |
+          The response should acknowledge the student's gratitude.
+         
+  
+  # 20. Ambiguous question - Few-shot
+  - vars:
+      inquiry: "Can you help with networks and also explain binary search?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The response should:
+          1. Address both topics (networks and binary search) clearly.
+          2. Ensure there is no confusion between them.
+    #20-30 more complex and edge cases
+  
+  # 21. Programming Languages - Few-shot
+  - vars:
+      inquiry: "What is the difference between procedural and object-oriented programming?"
+    assert:
+      - type: similar
+        value: "Procedural programming focuses on procedures or functions, while object-oriented programming emphasizes objects and classes."
+        threshold: 0.7
+  
+  # 22. Data Structures - Zero-shot
+  - vars:
+      inquiry: "Explain the time complexity of quicksort."
+    assert:
+      - type: similar
+        value: "Quicksort has a time complexity of O(n log n)."
+        threshold: 0.7
+
+  # 23. Data Structures - Few-shot  
+  - vars:
+      inquiry: "What is the difference between an array and a linked list?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The response should explain:
+          1. Arrays store elements in contiguous memory locations.
+          2. Linked lists use nodes with pointers to connect elements.
+          3. Mention advantages and disadvantages of each data structure.
+
+

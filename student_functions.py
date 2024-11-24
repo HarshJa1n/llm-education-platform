@@ -13,6 +13,7 @@ from urllib.parse import urlparse, parse_qs
 from pypdf import PdfReader
 from ai71 import AI71
 import os
+from tutor_agent import question_router, client
 from dotenv import load_dotenv
 load_dotenv()
 AI71_API_KEY = os.getenv("AI71_API_KEY")
@@ -94,6 +95,16 @@ def generate_ai_response(query):
         if chunk.choices[0].delta.content:
             ai_response += chunk.choices[0].delta.content
     return ai_response.replace('###', '')
+# def generate_ai_response(query):
+#     context_variables = {
+#         "student_name": "Connor"
+#     }
+#     response = client.run(
+#         agent=question_router,
+#         messages=[{"role": "user", "content": query}],
+#         context_variables=context_variables
+#     )
+#     return response.messages[-1]["content"]
 
 
 def generate_project_idea(subject, topic, overview):
