@@ -1,4 +1,4 @@
-from tutor_agent import Swarm, Agent
+from swarm import Swarm, Agent
 import dotenv
 
 dotenv.load_dotenv()
